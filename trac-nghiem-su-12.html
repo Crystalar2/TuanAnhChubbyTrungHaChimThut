@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ôn tập Lịch sử 12</title>
+<style>
+:root{--bg:#f6f3ec;--card:#fff;--ink:#1d2433;--mute:#6a7385;--line:#d9d4c7;--acc:#8c2f39;--ok:#1f7a4d;--okb:#e0f3e8;--no:#b3261e;--nob:#fbe4e2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15181f;--card:#1f242e;--ink:#eceef3;--mute:#9aa3b5;--line:#333b4a;--acc:#e08a93;--ok:#6fd3a0;--okb:#17372a;--no:#ff9a92;--nob:#40201e}}
+:root[data-theme="dark"]{--bg:#15181f;--card:#1f242e;--ink:#eceef3;--mute:#9aa3b5;--line:#333b4a;--acc:#e08a93;--ok:#6fd3a0;--okb:#17372a;--no:#ff9a92;--nob:#40201e}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:17px/1.5 Georgia,"Times New Roman",serif;min-height:100vh}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:26px;margin:20px 0 4px;color:var(--acc)}
+.mute{color:var(--mute);font-size:15px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:8px 0 14px}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .25s}
+.top{display:flex;justify-content:space-between;font-size:14px;color:var(--mute)}
+.q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px}
+.q b{display:block;margin-bottom:4px;color:var(--acc);font-size:15px}
+button{font:inherit;color:inherit;cursor:pointer}
+.opt{display:block;width:100%;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;margin:8px 0}
+.opt:active{transform:scale(.99)}
+.opt.ok{background:var(--okb);border-color:var(--ok)}
+.opt.no{background:var(--nob);border-color:var(--no)}
+.opt:disabled{cursor:default;opacity:1}
+.tf{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;margin:8px 0}
+.tf.ok{border-color:var(--ok)}.tf.no{border-color:var(--no)}
+.tf p{margin:0 0 8px}
+.row{display:flex;gap:8px}
+.row button{flex:1;padding:10px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg)}
+.row button.ok{background:var(--okb);border-color:var(--ok);color:var(--ok);font-weight:700}
+.row button.no{background:var(--nob);border-color:var(--no);color:var(--no)}
+.res{margin-top:6px;font-size:15px;font-weight:700}
+.res.ok{color:var(--ok)}.res.no{color:var(--no)}
+.main{display:block;width:100%;padding:14px;margin-top:14px;border:0;border-radius:10px;background:var(--acc);color:#fff;font-weight:700;font-size:17px}
+:root[data-theme="dark"] .main,:root:not([data-theme="light"]) .main{color:#15181f}
+.mode{display:block;width:100%;padding:14px;margin:8px 0;border:1.5px solid var(--line);border-radius:10px;background:var(--card);text-align:left}
+.score{font-size:48px;font-weight:700;color:var(--acc);margin:10px 0}
+.hide{display:none}
+</style></head><body><main id="app"></main>
+<script>
+const MC=[
+["Mục tiêu quan trọng nhất và là cơ sở để thực hiện các mục tiêu khác của Liên hợp quốc là",["thúc đẩy quan hệ hữu nghị giữa các dân tộc","thúc đẩy hợp tác quốc tế","trung tâm điều hòa các nỗ lực quốc tế","duy trì hòa bình và an ninh quốc tế"],3],
+["Mục tiêu và nguyên tắc hoạt động của Liên hợp quốc được quy định bởi văn kiện nào?",["Hiến chương","Hiến pháp","Tuyên ngôn","Hiệp định"],0],
+["Đâu là một trong những nội dung của mục tiêu, hành động mang tính toàn cầu đến năm 2030 của Liên hợp quốc?",["Chống nạn thất nghiệp","Quyền tự do chính trị","Chống bạo lực gia đình","Chất lượng giáo dục"],3],
+["Đâu KHÔNG phải là nguyên tắc cơ bản của Liên hợp quốc?",["Bình đẳng về chủ quyền giữa các quốc gia","Tôn trọng toàn vẹn lãnh thổ và độc lập chính trị quốc gia","Ưu tiên sử dụng vũ lực về tranh chấp quốc tế","Giải quyết các tranh chấp quốc tế bằng biện pháp hòa bình"],2],
+["Liên hợp quốc quyết định lấy ngày 24-10 hằng năm làm ngày Liên hợp quốc vì đó là ngày",["Kết thúc Chiến tranh lạnh","Bế mạc hội nghị I-an-ta","Hiến chương Liên hợp quốc có hiệu lực","Khai mạc lễ thành lập Liên hợp quốc"],2],
+["Hội nghị I-an-ta (2/1945) được tiến hành trong giai đoạn nào của Chiến tranh thế giới thứ hai?",["Vừa mới kết thúc","Bùng nổ và lan rộng","Giai đoạn sắp kết thúc","Đang diễn ra ác liệt"],2],
+["“Trật tự thế giới hai cực I-an-ta” sau Chiến tranh thế giới thứ hai do hai cường quốc nào chi phối?",["Mỹ và Đức","Mỹ và Anh","Mỹ và Trung Quốc","Mỹ và Liên Xô"],3],
+["Quyết định nào sau đây KHÔNG phải của Hội nghị I-an-ta (2/1945)?",["Thành lập tổ chức quốc tế là Liên hợp quốc","Thống nhất tiêu diệt chủ nghĩa phát xít","Hình thành trật tự thế giới mới","Phân chia phạm vi ảnh hưởng"],2],
+["Mục tiêu chung được các cường quốc thỏa thuận trong hội nghị I-an-ta (2/1945) là",["chấm dứt tình trạng nội chiến ở Trung Quốc, Áo và Phần Lan","thủ tiêu chủ nghĩa thực dân và chủ nghĩa phân biệt chủng tộc","xây dựng nước Đức trở thành quốc gia thống nhất và dân chủ","tiêu diệt tận gốc phát xít Đức và chủ nghĩa quân phiệt Nhật Bản"],3],
+["Để tiêu diệt chủ nghĩa quân phiệt Nhật Bản và nhanh chóng kết thúc chiến tranh, hội nghị I-an-ta đã quyết định",["Anh, Pháp, Mỹ sẽ tham gia chiến tranh chống Nhật ở châu Âu","Anh và Liên Xô tiêu diệt lực lượng quân Nhật tại Trung Quốc","Liên Xô sẽ đánh Nhật ở châu Á sau khi đánh bại phát xít Đức","Liên Xô không đưa quân tham gia chống Nhật ở châu Á"],2],
+["Một trong những khu vực được hội nghị I-an-ta (1945) quy định thuộc phạm vi ảnh hưởng của Liên Xô là",["Tây Âu","Đông Âu","Nhật Bản","Triều Tiên"],1],
+["Một trong những khu vực được hội nghị I-an-ta (1945) quy định thuộc phạm vi ảnh hưởng của Mỹ là",["Tây Âu","Đông Âu","Mông Cổ","Trung Đông"],0],
+["Liên Xô và Mỹ đẩy mạnh đối thoại hợp tác từ",["nửa sau những năm 80","nửa sau những năm 90","nửa đầu những năm 90","nửa đầu những năm 80"],0],
+["Năm 1989, tại đảo Man-ta, Mỹ và Liên Xô đã có hành động nào sau đây?",["Tuyên bố chung về vũ khí chiến lược","Ký nhiều hiệp định thương mại tự do","Tuyên bố chấm dứt Chiến tranh lạnh","Cam kết hòa bình giữa Mỹ và Liên Xô"],2],
+["Sự kiện nào sau đây đánh dấu trật tự hai cực I-an-ta chấm dứt?",["Liên Xô chính thức tan rã (12/1991)","Chiến tranh lạnh kết thúc (1989)","Bức tường Béc-lin sụp đổ (1989)","Khủng hoảng năng lượng (1973)"],0],
+["Xu thế chủ đạo trong quan hệ giữa các cường quốc sau Chiến tranh lạnh là",["đối thoại, thỏa hiệp, tránh xung đột trực tiếp","tôn trọng vai trò của Liên hợp quốc","hợp tác, không cạnh tranh, không mâu thuẫn","hòa bình, không xung đột, tiến hành hợp tác"],0],
+["Sau Chiến tranh lạnh, hầu hết các quốc gia trên thế giới đều điều chỉnh chiến lược phát triển tập trung vào",["kinh tế","đối ngoại","văn hóa","chính trị"],0],
+["Vì sao sau Chiến tranh lạnh, hầu hết các quốc gia trên thế giới đều điều chỉnh chiến lược phát triển tập trung vào kinh tế?",["Tăng cường sức mạnh, tiềm lực quốc gia, nâng cao đời sống dân","Thúc đẩy mạnh mẽ quá trình toàn cầu hóa","Tiếp tục khẳng định vị thế quốc gia trên trường quốc tế","Khẳng định vai trò của quốc gia trong quan hệ quốc tế"],0],
+["Một trong những biểu hiện của xu thế Toàn cầu hóa là",["sự gia tăng của thương mại thế giới","xu thế hòa hoãn Đông, Tây thế kỷ XX","mâu thuẫn giữa hai siêu cường Xô, Mỹ","thế giới đã chia thành hai cực, hai phe"],0],
+["Các thành viên sáng lập ASEAN là",["Thái Lan, Bru-nây, Ma-lai-xi-a, Xin-ga-po và Phi-líp-pin","Thái Lan, Mi-an-ma, Ma-lai-xi-a, Xin-ga-po và Phi-líp-pin","Thái Lan, In-đô-nê-xi-a, Ma-lai-xi-a, Xin-ga-po và Phi-líp-pin","Thái Lan, Cam-pu-chia, Ma-lai-xi-a, Xin-ga-po và Phi-líp-pin"],2],
+["Quốc gia nào sau đây là thành viên thứ 7 của Hiệp hội các quốc gia Đông Nam Á (ASEAN)?",["Việt Nam","Bru-nây","Campuchia","Indonesia"],0],
+["Hiệp hội các quốc gia Đông Nam Á được thành lập vào thời gian nào và ở đâu?",["Tháng 8-1968, tại Gia-các-ta (In-đô-nê-xi-a)","Tháng 8-1968, tại Ba-li (In-đô-nê-xi-a)","Tháng 8-1967, tại Băng Cốc (Thái Lan)","Tháng 10-1967, tại Xin-ga-po"],2],
+["Nội dung nào dưới đây KHÔNG phải là yếu tố dẫn đến sự ra đời của ASEAN?",["Hạn chế ảnh hưởng từ bên ngoài vào khu vực","Tác động của xu thế toàn cầu hóa","Nhu cầu hợp tác giữa các nước để phát triển","Sự phát triển của xu thế liên kết khu vực"],1],
+["Đâu KHÔNG phải là mục đích khi thành lập ASEAN?",["Tăng cường hợp tác kinh tế, văn hóa, xã hội","Phấn đấu để ASEAN trở thành tổ chức bao gồm tất cả các quốc gia châu Á","Tạo điều kiện cho các nước thành viên phát triển và hội nhập với khu vực, thế giới","Phấn đấu để Đông Nam Á trở thành khu vực hòa bình, tự do, thịnh vượng"],1],
+["Trong những sự kiện dưới đây, sự kiện nào đánh dấu sự khởi sắc trong hoạt động của tổ chức ASEAN?",["Vấn đề Cam-pu-chia được giải quyết năm 1991","Hiệp ước Ba-li được kí kết năm 1976","Việt Nam gia nhập vào tổ chức năm 1995","Thông qua Hiến chương ASEAN (2007)"],1],
+["Theo Tuyên bố Ba-li (1976), cơ chế hoạt động cao nhất của ASEAN được xác định tại",["Hội nghị Thượng đỉnh","Hội nghị Ngoại trưởng","Hội nghị Bộ trưởng quốc phòng","Hội nghị ASEAN+3"],0],
+["ASEAN đã thực hiện nội dung nào sau đây trong quá trình phát triển của mình để tạo nền tảng xây dựng một cộng đồng ASEAN?",["Cải thiện quan hệ với các nước trong khu vực","Kết nạp thêm các thành viên mới","Cải thiện quan hệ với các nước Đông Dương","Kết nạp thành viên ở ngoài khu vực"],1],
+["Từ năm 2015 đến nay, thành lập và xây dựng Cộng đồng ASEAN KHÔNG nhằm lĩnh vực",["chính trị - an ninh","kinh tế","văn hóa – xã hội","an ninh quốc phòng"],3],
+["Phát triển kinh tế đồng đều, giảm nghèo, thu hẹp khoảng cách về kinh tế - xã hội là nỗ lực của",["ASPC","AEC","ASEAN","ASCC"],1],
+["Nội dung nào sau đây là điều kiện khách quan thuận lợi cho Cách mạng tháng Tám nổ ra?",["Chiến tranh thế giới thứ hai đã bùng nổ","phát xít Đức đầu hàng quân Đồng minh","Mỹ ném bom nguyên tử xuống Nhật Bản","Nhật đầu hàng Đồng minh"],3],
+["Thời cơ khách quan thuận lợi của Cách mạng tháng Tám là sự kiện nào sau đây?",["Nhật đảo chính lật đổ Pháp trên toàn Đông Dương (9/3/1945)","Mỹ ném hai quả bom nguyên tử xuống Nhật (6, 9/8/1945)","Đức đã đầu hàng quân Đồng minh vô điều kiện (9/5/1945)","Phát xít Nhật đầu hàng Đồng minh vô điều kiện (15/8/1945)"],3],
+["Sự kiện nào sau đây đánh dấu nước Việt Nam Dân chủ Cộng hòa được thành lập?",["Hồ Chí Minh đọc Tuyên ngôn độc lập (2/9/1945)","Đại hội quốc dân họp ở Tân Trào (8/1945)","Hội nghị đại biểu toàn quốc của Đảng (8/1945)","Tiến hành Tổng tuyển cử bầu Quốc hội (1/1946)"],0],
+["Theo những quy định tại hội nghị Pốt-đam, việc giải giáp quân Nhật ở Đông Dương được giao cho những quốc gia nào?",["Anh – Trung Hoa Dân quốc","Pháp – Anh","Đức – Trung Hoa Dân quốc","Mỹ - Pháp"],0],
+["Ngày 9/8/1945, quân đội Liên Xô tham chiến chống Nhật ở châu Á khi đã tấn công",["quân Đức ở Béc-lin","đạo quân Quan Đông","Nhật ở Đông Dương","tàn dư phát xít Đức"],1],
+["Đại hội Quốc dân ở Tân Trào từ ngày 16 đến 17/8/1945 đã thông qua nội dung nào?",["Phát lệnh Tổng khởi nghĩa trong cả nước","Thành lập Chính phủ lâm thời nước Việt Nam Dân chủ Cộng hòa","Cử ra Ủy ban Dân tộc giải phóng Việt Nam do Hồ Chí Minh làm Chủ tịch","Quyết định các chính sách đối nội và đối ngoại của đất nước"],2],
+["Đại hội Quốc dân họp ở Tân Trào (từ ngày 16 - 17/8/1945) đã thể hiện",["ý chí thống nhất đoàn kết và nguyện vọng của toàn dân","cuộc Tổng khởi nghĩa đã diễn ra và thắng lợi nhanh chóng","chủ trương Tổng khởi nghĩa giành chính quyền của Đảng","quyết tâm phối hợp với phe Đồng minh để chống phát xít"],0],
+["Trong Tổng khởi nghĩa tháng Tám năm 1945, thắng lợi ở Hà Nội, Huế, Sài Gòn có ý nghĩa",["Tổng khởi nghĩa giành chính quyền được thắng lợi trong cả nước","ảnh hưởng lớn và quyết định đến các địa phương trong cả nước","đó là các cuộc khởi nghĩa hình mẫu trong Cách mạng tháng Tám","đánh dấu Cách mạng tháng Tám giành được thắng lợi hoàn toàn"],1],
+["Thời cơ của Tổng khởi nghĩa tháng Tám được xác định trong khoảng thời gian từ khi",["Nhật đảo chính Pháp đến sau khi Đồng minh vào Đông Dương","Mỹ tuyên chiến với Nhật đến trước khi Đồng minh vào Đông Dương","Nhật đảo chính Pháp đến trước khi Đồng minh vào Đông Dương","Nhật đầu hàng Đồng minh đến trước khi Đồng minh vào Đông Dương"],3],
+["Sự kiện nào dưới đây đánh dấu chế độ phong kiến ở Việt Nam đã sụp đổ hoàn toàn?",["Giành được chính quyền ở Hà Nội","Vua Bảo Đại tuyên bố thoái vị","Khởi nghĩa thắng lợi trong cả nước","Hồ Chí Minh đọc Tuyên ngôn Độc lập"],1],
+["Thời cơ của Tổng khởi nghĩa giành chính quyền ở Việt Nam năm 1945 kết thúc khi nào?",["Nhật đầu hàng Đồng minh vô điều kiện","Quân Đồng minh vào giải giáp phát xít Nhật","Nhật đảo chính Pháp độc chiếm Đông Dương","Chiến tranh thế giới thứ hai kết thúc ở châu Âu"],1],
+["Một trong những nguyên nhân khách quan dẫn tới thắng lợi của Cách mạng tháng Tám (1945) là",["những thắng lợi của khối Đồng minh","sự chuẩn bị của Đảng trong 15 năm","tinh thần đoàn kết của nhân dân","sự giúp đỡ của Liên Xô, Trung Quốc"],0],
+["Nội dung nào dưới đây phản ánh đúng về Cách mạng tháng Tám năm 1945 ở Việt Nam?",["Là một cuộc cách mạng bạo lực có kết hợp đấu tranh chính trị và vũ trang","Khởi nghĩa từ đô thị rồi lan ra các vùng nông thôn, đấu tranh chính trị là chủ yếu","Khởi nghĩa từ nông thôn tiến vào thành thị, đấu tranh vũ trang là chủ yếu","Là một cuộc cách mạng hòa bình có kết hợp đấu tranh chính trị và vũ trang"],0],
+["Nhận xét nào về Cách mạng tháng Tám 1945 ở Việt Nam là KHÔNG đúng?",["Đây là cuộc cách mạng có tính nhân dân sâu sắc","Đây là cuộc cách mạng có tính chất dân tộc điển hình","Đây là cuộc cách mạng có tính chất dân chủ điển hình","Đây là cuộc cách mạng có tính chất bạo lực"],2],
+["Nhận xét nào dưới đây KHÔNG đúng về cuộc Cách mạng tháng Tám 1945 ở Việt Nam?",["Đây là cuộc cách mạng diễn ra nhanh, gọn, ít đổ máu, bằng phương pháp hòa bình","Đây là cuộc cách mạng diễn ra với sự kết hợp lực lượng chính trị và lực lượng vũ trang","Đây là cuộc cách mạng đi từ khởi nghĩa từng phần tiến lên tổng khởi nghĩa","Đây là cuộc cách mạng diễn ra với sự kết hợp khởi nghĩa ở cả nông thôn và thành thị"],0]
+];
+const TF=[
+["Đọc đoạn tư liệu (Hiến chương Liên hợp quốc, 24-10-1945): “Duy trì hòa bình và an ninh quốc tế… thi hành những biện pháp tập thể có hiệu quả để phòng ngừa và loại trừ các mối đe dọa hòa bình…”",[
+["Đoạn tư liệu thể hiện mục tiêu của Liên hợp quốc là duy trì hòa bình và an ninh quốc tế.",1],
+["Để thúc đẩy giải quyết các tranh chấp giữa các quốc gia thành viên, Liên hợp quốc khuyến khích thông qua các văn bản pháp lý của mỗi nước làm cơ sở để giải quyết.",0],
+["Trong số các mục tiêu của Liên hợp quốc, duy trì hòa bình và an ninh quốc tế là mục tiêu được đặt lên hàng đầu.",1],
+["Ngày nay, Liên hợp quốc vẫn tiếp tục thúc đẩy mục tiêu giải quyết các vụ tranh chấp, xung đột quốc tế bằng biện pháp hòa bình.",1]]],
+["Đọc đoạn tư liệu: “Trong trật tự thế giới hai cực I-an-ta, đã diễn ra một cuộc đối đầu gay gắt, quyết liệt… giữa hai “cực” Xô - Mỹ…”",[
+["Trong trật tự thế giới hai cực I-an-ta đã diễn ra cuộc đối đầu gay gắt, quyết liệt giữa hai “cực” Xô - Mỹ, làm cho cục diện thế giới luôn phức tạp, căng thẳng.",1],
+["Với trật tự hai cực I-an-ta, Liên Xô và Mỹ đã đạt được những mục tiêu cơ bản, chi phối cục diện thế giới, đồng thời trật tự này đã xâm phạm đến chủ quyền, lãnh thổ và lợi ích của nhiều nước.",1],
+["Trong sự đối đầu 2 cực I-an-ta, cuộc chiến tranh cục bộ lớn nhất phản ánh mâu thuẫn giữa hai cực, hai phe là chiến tranh xâm lược Đông Dương của Pháp (1945 - 1954).",0],
+["Sự tồn tại của trật tự thế giới hai cực I-an-ta gắn liền với sự đối đầu giữa hai hệ thống xã hội đối lập là tư bản chủ nghĩa và xã hội chủ nghĩa.",1]]],
+["Đọc đoạn tư liệu (Hoàng Văn Hiến – Nguyễn Viết Thảo): “Với sự kết thúc của trật tự hai cực Xô - Mỹ… một trật tự đa trung tâm đã và đang hình thành…”",[
+["Đoạn tư liệu đề cập đến sự hình thành của một trật tự thế giới mới từ sau Chiến tranh thế giới thứ hai.",1],
+["Trong trật tự thế giới mới, các cường quốc đã điều chỉnh quan hệ theo hướng đối thoại, thỏa hiệp, tránh xung đột quân sự trực tiếp.",1],
+["Trong xu thế trật tự thế giới mới, sức mạnh tổng hợp của mỗi quốc gia tùy thuộc vào sức mạnh quân sự, chính trị.",1],
+["Sự hình thành trật tự thế giới mới là một trong những nhân tố tác động để Việt Nam đẩy mạnh hơn nữa công cuộc Đổi mới đất nước.",1]]],
+["Đọc đoạn tư liệu (Trần Thị Vinh, Lê Văn Anh): “Toàn cầu hóa mà trước hết về thực chất là toàn cầu hóa kinh tế đang trở thành một đặc trưng chủ yếu của sự phát triển thế giới…”",[
+["Một trong những thách thức to lớn của xu thế toàn cầu hóa đối với các quốc gia, đặc biệt là các nước đang phát triển là làm trầm trọng thêm bất công xã hội.",1],
+["Toàn cầu hóa là một xu thế khách quan, tất yếu nhưng không thể đảo ngược vì đó là hệ quả của việc mở rộng quan hệ thương mại giữa các cường quốc.",1],
+["Đoạn trích trên đề cập đến một trong những xu thế phát triển chính của thế giới sau Chiến tranh lạnh là xu thế toàn cầu hóa.",1],
+["Xu thế toàn cầu hóa đưa đến sự phát triển nhanh của lực lượng sản xuất, đòi hỏi các quốc gia phải tăng cường quan hệ hợp tác quốc tế.",1]]],
+["Đọc đoạn tư liệu (Vũ Dương Ninh): “Hiệp hội các quốc gia Đông Nam Á (ASEAN) được thành lập ngày 8-8-1967 nhằm thúc đẩy hợp tác kinh tế, văn hóa và xã hội giữa các quốc gia thành viên, đồng thời duy trì hòa bình, ổn định khu vực…”",[
+["Năm 1967, ASEAN được thành lập với mục tiêu thúc đẩy hợp tác giữa các quốc gia Đông Nam Á và duy trì hòa bình, ổn định khu vực.",1],
+["Sự phát triển của ASEAN cho thấy tổ chức này ngày càng đóng vai trò là cơ chế hợp tác khu vực nhằm điều hòa quan hệ giữa các thành viên trong cảnh nhiều biến động.",1],
+["Việc ASEAN mở rộng thành viên và tăng cường liên kết đã làm cho tổ chức này có khả năng định hướng và điều tiết trực tiếp các quyết sách đối nội của các quốc gia thành viên.",0],
+["Vai trò của ASEAN trong việc duy trì hòa bình, ổn định khu vực được bảo đảm chủ yếu thông qua các cơ chế ra quyết định mang tính ràng buộc pháp lí cao và chi phối đối với các quốc gia thành viên.",0]]],
+["Đọc đoạn tư liệu (ASEAN, Tuyên bố về khu vực hòa bình, tự do và trung lập, 27-11-1971): “Quyết tâm sử dụng những cố gắng cần thiết bước đầu để bảo đảm việc công nhận và tôn trọng Đông Nam Á là một khu vực hòa bình, tự do và trung lập…”",[
+["Nội dung tư liệu đề cập đến các nước Đông Nam Á thành lập khu vực hòa bình, tự do, trung lập.",1],
+["Nội dung tuyên bố nhấn mạnh ASEAN không chấp nhận sự can thiệp của các nước ngoài khu vực.",1],
+["Văn kiện trên có vai trò quyết định trong việc duy trì hòa bình, thống nhất và trung lập của Đông Nam Á.",1],
+["Tuyên bố về khu vực hòa bình, tự do và trung lập vẫn có giá trị đối với tổ chức ASEAN ngày nay.",1]]],
+["Đọc đoạn tư liệu (Hồ Chí Minh): “Nói về thắng lợi của cách mạng tháng Tám… Lực lượng toàn dân là lực lượng vĩ đại hơn hết. Không ai thắng được lực lượng đó”.",[
+["Việc xác định chính xác mâu thuẫn chủ yếu của dân tộc giúp cho Đảng Cộng sản Đông Dương đưa ra nhiều sáng tạo trong việc xây dựng lực lượng cho cách mạng tháng Tám năm 1945.",1],
+["Cách mạng tháng Tám thành công là kết quả của sự kết hợp giữa nhân tố chủ quan và khách quan, trong nhân tố khách quan giữ vai trò quyết định.",0],
+["Cách mạng tháng Tám đã vận dụng tốt nghệ thuật chớp thời cơ, nổi dậy giành chính quyền từ khi Nhật đầu hàng Đồng minh đến trước khi quân Đồng minh vào giải giáp quân đội Nhật.",1],
+["Khối đại đoàn kết của dân tộc Việt Nam bắt đầu hình thành từ khi Đảng Cộng sản Việt Nam được thành lập và phát triển lên đỉnh cao nhất là trong cách mạng tháng Tám năm 1945.",1]]],
+["Đọc đoạn tư liệu (Nguyễn Quang Ngọc): “Cách mạng tháng Tám là một sự kiện vĩ đại trong lịch sử dân tộc Việt Nam… xiềng xích nô lệ mà thực dân Pháp và quân phiệt Nhật trói buộc nhân dân ta trong suốt 80 năm đã bị đập tan…”",[
+["Cách mạng tháng Tám năm 1945 đã lật nhào chế độ quân chủ tồn tại hàng nghìn năm trên đất nước Việt Nam.",1],
+["Cách mạng tháng Tám năm 1945 ở Việt Nam mang tính dân chủ vì đã góp phần vào sự nghiệp đấu tranh vì quyền sống con người.",1],
+["Tổng khởi nghĩa tháng Tám năm 1945 ở Việt Nam mang tính chất dân chủ điển hình vì đã góp phần vào thắng lợi của các lực lượng dân chủ và tiến bộ trong cuộc chiến chống phát xít.",1],
+["Đoạn tư liệu cho thấy, cách mạng tháng Tám năm 1945 ở Việt Nam đã xóa bỏ được hết các cơ sở kinh tế - xã hội của chế độ phong kiến, thực dân.",0]]]
+];
+const L="ABCD",app=document.getElementById("app");
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+let Q=[],i=0,score=0,total=0,answered=0;
+function home(){
+app.innerHTML=`<h1>Ôn tập Lịch sử 12</h1><p class="mute">Đề cương giữa học kì 1 · ${MC.length} câu trắc nghiệm · ${TF.length} câu đúng sai. Câu hỏi được xáo ngẫu nhiên.</p>
+<button class="mode" data-m="all"><b>Tất cả</b><br><span class="mute">Trắc nghiệm và đúng sai trộn lẫn</span></button>
+<button class="mode" data-m="mc"><b>Chỉ trắc nghiệm</b><br><span class="mute">${MC.length} câu, chọn A–D</span></button>
+<button class="mode" data-m="tf"><b>Chỉ đúng sai</b><br><span class="mute">${TF.length} câu, mỗi câu 4 ý</span></button>`;
+app.querySelectorAll(".mode").forEach(b=>b.onclick=()=>start(b.dataset.m));}
+function start(m){
+Q=[];if(m!="tf")MC.forEach(q=>Q.push({t:"mc",q}));if(m!="mc")TF.forEach(q=>Q.push({t:"tf",q}));
+Q=shuf(Q);i=0;score=0;total=0;show();}
+function head(){return `<div class="top"><span>Câu ${i+1}/${Q.length}</span><span>Đúng: ${score}</span></div><div class="bar"><i style="width:${i/Q.length*100}%"></i></div>`}
+function nextBtn(){const b=document.createElement("button");b.className="main";b.textContent=i+1<Q.length?"Câu tiếp":"Xem kết quả";b.onclick=()=>{i++;i<Q.length?show():end()};app.appendChild(b);b.scrollIntoView({block:"nearest",behavior:"smooth"})}
+function show(){
+const it=Q[i];window.scrollTo(0,0);
+if(it.t=="mc"){const [q,o,a]=it.q;
+app.innerHTML=head()+`<div class="q"><b>Trắc nghiệm</b>${q}</div>`;
+o.forEach((x,k)=>{const b=document.createElement("button");b.className="opt";b.textContent=L[k]+". "+x;
+b.onclick=()=>{app.querySelectorAll(".opt").forEach((e,n)=>{e.disabled=true;if(n==a)e.classList.add("ok")});
+if(k==a){score++;}else b.classList.add("no");
+const r=document.createElement("div");r.className="res "+(k==a?"ok":"no");r.textContent=k==a?"Chính xác!":"Sai. Đáp án đúng: "+L[a];app.appendChild(r);
+app.firstChild.querySelector("span:last-child").textContent="Đúng: "+score;nextBtn()};app.appendChild(b)})}
+else{const [q,s]=it.q;let n=0,c=0;
+app.innerHTML=head()+`<div class="q"><b>Đúng sai · chọn Đúng hoặc Sai cho từng ý</b>${q}</div>`;
+s.forEach((x,k)=>{const d=document.createElement("div");d.className="tf";
+d.innerHTML=`<p>${"abcd"[k]}) ${x[0]}</p><div class="row"><button>Đúng</button><button>Sai</button></div>`;
+const bs=d.querySelectorAll("button");
+bs.forEach((b,v)=>b.onclick=()=>{const t=x[1]?0:1;bs.forEach(e=>e.disabled=true);bs[t].classList.add("ok");
+const good=(v==0)==!!x[1];if(!good)b.classList.add("no");else c++;
+d.classList.add(good?"ok":"no");const r=document.createElement("div");r.className="res "+(good?"ok":"no");
+r.textContent=(good?"Chính xác. ":"Chưa đúng. ")+"Ý này "+(x[1]?"ĐÚNG":"SAI");d.appendChild(r);
+if(++n==4){if(c==4)score++;nextBtn();app.firstChild.querySelector("span:last-child").textContent="Đúng: "+score}});
+app.appendChild(d)})}}
+function end(){app.innerHTML=`<h1>Hoàn thành</h1><div class="score">${score}/${Q.length}</div><p class="mute">Câu đúng sai chỉ tính điểm khi đúng cả 4 ý.</p><button class="main" id="r">Làm lại (xáo mới)</button><button class="mode" id="h">Về trang chọn chế độ</button>`;
+document.getElementById("r").onclick=()=>{Q=shuf(Q);i=0;score=0;show()};document.getElementById("h").onclick=home}
+home();
+</script></body></html>
