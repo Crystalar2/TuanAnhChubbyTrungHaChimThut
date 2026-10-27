@@ -1,2 +1,0 @@
-# TuanAnhChubbyTrungHaChimThut
-Bdbdbdjjsjsnsnsnsmjsns
